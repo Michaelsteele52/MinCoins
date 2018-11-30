@@ -7,7 +7,7 @@ using System.Text;
 namespace MinCoins
 {
     [DataContract]
-    public  class InputInfoObject
+    public class InputInfoObject
     {
         [DataMember(Name = "Input")]
         public int Input { get; set; }
@@ -19,6 +19,8 @@ namespace MinCoins
         public int AmountOfCombosOfCoins { get; set; }
         [DataMember(Name = "AllCombinations")]
         public List<List<int>> AllCombinations { get; set; }
+        [DataMember(Name = "LengthOfShortestCombo")]
+        public int LengthOfShortestCombo { get; set; }
         private readonly FindAmountAndWays _findShortestCombo = new FindAmountAndWays();
         public InputInfoObject(int input, int[] coins)
         {
@@ -31,6 +33,7 @@ namespace MinCoins
             ShortestComboOfCoins = _findShortestCombo.ShortestCombination(Coins, Input);
             AllCombinations = _findShortestCombo.Combinations(Coins, Input);
             AmountOfCombosOfCoins = AllCombinations.Count;
+            LengthOfShortestCombo = ShortestComboOfCoins.Count;
         }
     }
 }

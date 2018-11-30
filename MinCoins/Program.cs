@@ -11,7 +11,7 @@ namespace MinCoins
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            int[] coins = {1,2,3};
+            int[] coins = {1,2,5};
             const int input = 10;
             var coinCombos = new InputInfoObject(input,coins);
             coinCombos.Compute();

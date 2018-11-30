@@ -38,26 +38,18 @@ namespace MinCoins
         {
             var grid = new Cell[coins.Length + 1,target + 1];
 
-            for (var i = 0; i <= coins.Length; i++)
-            {
-                grid[i,0] = new Cell();
-            }
-
-            for (var i = 1; i <= target; i++)
-            {
-                grid[0,i] = new Cell();
-            }
+            grid = GridSetUp(grid, coins, target);
 
             for(var i = 1; i <= coins.Length; i++)
             {
                 var coin = coins[i - 1];
-                for (int j = 1; j <= target; j++)
+                for (var j = 1; j <= target; j++)
                 {
                     var cell = new Cell();
                     var previousCoinCell = grid[i - 1, j];
                     cell.Combinations = previousCoinCell.Combinations;
 
-                    if (j.Equals(coin))
+                    if (j == coin)
                     {
                         cell.AddCombinations(new List<int>(coin));
                     }
@@ -74,6 +66,20 @@ namespace MinCoins
                 }
             }
             return grid[coins.Length,target].Combinations;
+        }
+
+        private Cell[,] GridSetUp(Cell[,] grid, int[] coins, int target)
+        {
+            for (var i = 0; i <= coins.Length; i++)
+            {
+                grid[i, 0] = new Cell();
+            }
+
+            for (var i = 1; i <= target; i++)
+            {
+                grid[0, i] = new Cell();
+            }
+            return grid;
         }
     }
 }
